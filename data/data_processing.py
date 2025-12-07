@@ -1,4 +1,5 @@
 import pandas as pd
+import matplotlib.pyplot as plt
 
 # --- Load electricity price data ---
 file_path = 'data/240923 - suivi marché depuis 2012.csv'
@@ -26,5 +27,7 @@ df_elec = df_elec[(df_elec['Date'] >= start_date) & (df_elec['Date'] <= end_date
 # Optional: set Date as index
 df_elec = df_elec.set_index('Date')
 
-# Display first rows
-print(df_elec.head())
+df_elec['Price'].plot(title="Electricity Price Over Time", figsize=(12,6))
+plt.xlabel("Date")
+plt.ylabel("Price (€)")
+plt.show()
