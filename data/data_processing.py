@@ -23,6 +23,8 @@ df_elec['Price'] = df_elec['Price'].astype(str).str.replace(',', '.').astype(flo
 start_date = pd.to_datetime("2012-01-02")
 end_date = pd.to_datetime("2021-03-01")
 df_elec = df_elec[(df_elec['Date'] >= start_date) & (df_elec['Date'] <= end_date)]
+# Fill missing values
+df_elec['Price'] = df_elec['Price'].fillna(method='ffill').fillna(method='bfill')
 
 # Optional: set Date as index
 df_elec = df_elec.set_index('Date')

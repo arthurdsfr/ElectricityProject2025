@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import MinMaxScaler
 from tensorflow.keras.models import Sequential, load_model
-from tensorflow.keras.layers import GRU, Dense
+from tensorflow.keras.layers import GRU, Dense, Input, Dropout
 from tensorflow.keras.callbacks import EarlyStopping
 
 
@@ -42,7 +42,8 @@ class GRUForecaster:
         X, y = self.create_windows(scaled)
 
         self.model = Sequential([
-            GRU(self.units, input_shape=(self.seq_len, 1)),
+            Input(shape=(self.seq_len, 1)),
+            GRU(self.units),
             Dense(32, activation='relu'),
             Dense(self.horizon)
         ])
@@ -76,7 +77,9 @@ class GRUForecaster:
         self.y_test = y_test
 
         self.model = Sequential([
-            GRU(self.units, input_shape=(self.seq_len, 1)),
+            Input(shape=(self.seq_len, 1)),
+            GRU(self.units),
+            Dropout(0.2),               # <--- helps prevent overfitting
             Dense(32, activation='relu'),
             Dense(self.horizon)
         ])
@@ -84,6 +87,8 @@ class GRUForecaster:
         self.model.compile(optimizer='adam', loss='mse')
 
         es = EarlyStopping(monitor='val_loss', patience=6, restore_best_weights=True)
+
+        batch_size = min(32, len(X_train), len(X_test))
 
         self.model.fit(
             X_train, y_train,
