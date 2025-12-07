@@ -44,6 +44,7 @@ class GRUForecaster:
         self.model = Sequential([
             Input(shape=(self.seq_len, 1)),
             GRU(self.units),
+            Dropout(0.2),            
             Dense(32, activation='relu'),
             Dense(self.horizon)
         ])
@@ -79,7 +80,7 @@ class GRUForecaster:
         self.model = Sequential([
             Input(shape=(self.seq_len, 1)),
             GRU(self.units),
-            Dropout(0.2),               # <--- helps prevent overfitting
+            Dropout(0.2),           
             Dense(32, activation='relu'),
             Dense(self.horizon)
         ])
