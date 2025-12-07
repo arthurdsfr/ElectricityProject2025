@@ -1,0 +1,14 @@
+training_data_paths:
+- ./chronos_finetuning_data\train.arrow
+probability:
+- 1.0
+context_length: 30
+prediction_length: 15
+min_past: 30
+max_steps: 1000
+learning_rate: 0.001
+shuffle_buffer_length: 1000
+model_id: amazon/chronos-t5-small
+random_init: false
+dataloader_num_workers: 0
+torch_compile: false

@@ -1,0 +1,31 @@
+# --- Modèles d'IA et Checkpoints (TRÈS IMPORTANT) ---
+*.pt
+*.pth
+*.safetensors
+*.ckpt
+*.h5
+*.pkl
+model/
+models/
+checkpoints/
+
+# --- Données (Data Science) ---
+*.csv
+*.xlsx
+*.json
+data/
+datasets/
+
+# --- Python et Environnements ---
+__pycache__/
+*.pyc
+venv/
+env/
+.env
+
+# --- Jupyter Notebooks ---
+# Ignore les dossiers de sauvegarde automatique des notebooks
+.ipynb_checkpoints/
+
+# --- VS Code (Configuration locale) ---
+.vscode/
