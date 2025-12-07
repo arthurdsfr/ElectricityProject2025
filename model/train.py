@@ -12,7 +12,7 @@ if project_root not in sys.path:
     sys.path.append(project_root)
 
 from model import GRUForecaster
-from data.data_processing import df_elec
+from data.data_processing import df_elec_train
 
 # ------------------- K-FOLD CROSS-VALIDATION -------------------
 def k_fold_cross_validation(folds, price_series, seq_len=30, horizon=15, units=64, epochs=50, batch_size=32):
@@ -77,7 +77,7 @@ folds = [
     ("2012-01-02", "2019-06-30", "2019-07-01", "2020-12-31"),
 ]
 
-prices = df_elec['Price']
+prices = df_elec_train['Price']
 
 # # ------------------- RUN CROSS-VALIDATION -------------------
 # fold_mae_results = k_fold_cross_validation(
@@ -85,9 +85,9 @@ prices = df_elec['Price']
 #     seq_len=30, horizon=15, units=64, epochs=50, batch_size=32
 # )
 
-# #------------------- TRAIN FINAL MODEL -------------------
-# save_path = "saved_models/gru_forecaster_full.h5"
-# forecaster = train_and_save_model(
-#    GRUForecaster, prices, save_path,
-#    seq_len=30, horizon=15, units=64, epochs=60, batch_size=32
-# )
+#------------------- TRAIN FINAL MODEL -------------------
+save_path = "saved_models/gru_forecaster_full.h5"
+forecaster = train_and_save_model(
+   GRUForecaster, prices, save_path,
+   seq_len=30, horizon=15, units=128, epochs=60, batch_size=32
+)

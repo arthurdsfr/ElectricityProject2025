@@ -7,7 +7,7 @@ from tensorflow.keras.callbacks import EarlyStopping
 
 
 class GRUForecaster:
-    def __init__(self, seq_len=30, horizon=15, units=64):
+    def __init__(self, seq_len=30, horizon=15, units=128):
         self.seq_len = seq_len
         self.horizon = horizon
         self.units = units
