@@ -216,3 +216,20 @@ plt.legend()
 plt.grid(True)
 plt.show()
 
+
+plt.figure(figsize=(14, 6))
+
+# Plot true price
+df_elec_test['Price'].plot(label="True Test Price", linewidth=2, color="black")
+
+# Plot only predictions with full 15-day horizon
+for dates, preds in all_preds:
+    if len(preds) == 15:  # <-- only plot full 15-day predictions
+        plt.plot(dates, preds, alpha=0.25, linewidth=1, color="blue")
+
+plt.title("15-Day Rolling Horizon Predictions")
+plt.xlabel("Date")
+plt.ylabel("Price (€)")
+plt.legend()
+plt.grid(True)
+plt.show()
